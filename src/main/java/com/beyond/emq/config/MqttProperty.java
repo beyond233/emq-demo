@@ -1,6 +1,7 @@
 package com.beyond.emq.config;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -11,12 +12,36 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "mqtt")
 @Data
+@Accessors(chain = true)
 public class MqttProperty {
-    private String host;
+
+    /**
+     * mqtt broker服务器地址
+     * */
+    private String serverAddr;
+    /**
+     * mqtt客户端id
+     * */
     private String clientId;
+    /**
+     * 用户名
+     * */
     private String username;
+    /**
+     * 密码
+     */
     private String password;
-    private long timeout;
+    /**
+     * 超时时间
+     */
+    private int timeout;
+    /**
+     * 存活时间
+     * */
     private long keepalive;
+    /**
+     * 会话时效： true-临时会话;false-持久会话
+     */
+    private boolean cleanSession;
 }
 
