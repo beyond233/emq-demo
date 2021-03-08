@@ -1,15 +1,15 @@
 #Tomcat
 server:
-  port: 8080
+  port: 9090
 
 
 
 #MQTT配置信息
 mqtt:
-  #MQTT-服务器连接地址，如果有多个，用逗号隔开，如：tcp://127.0.0.1:61613，tcp://192.168.2.133:61613
-  serverAddr: tcp://192.168.1.7:1883
+  #MQTT-服务器连接地址，如果有多个，用逗号隔开，如：tcp://127.0.0.1:61613 
+  serverAddr: tcp://47.105.35.38:1883
   #MQTT-连接服务器默认客户端ID
-  clientId: mqttjs_cloud
+  clientId: emq_demo
   #MQTT-用户名
   username: admin
   #MQTT-密码
@@ -19,5 +19,5 @@ mqtt:
   #心跳检查时间
   keepalive: 10
   #会话时效
-#  cleanSession: true
+  cleanSession: true
 

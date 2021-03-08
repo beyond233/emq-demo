@@ -36,7 +36,7 @@ public class EmqClient {
     public void init() {
         MqttClientPersistence persistence = new MemoryPersistence();
         try {
-            mqttClient = new MqttClient(mqttProperty.getServerAddr(), mqttProperty.getClientId(), persistence);
+            mqttClient = new MqttClient(mqttProperty.getServerAddr(), mqttProperty.getClientId(), null);
         } catch (MqttException e) {
             log.error("【mqtt】init mqtt client failed! serverAddr={},clientId={}", mqttProperty.getServerAddr(), mqttProperty.getClientId());
             e.printStackTrace();
@@ -60,7 +60,7 @@ public class EmqClient {
 
         mqttClient.setCallback(mqttCallback);
         try {
-            mqttClient.connect();
+            mqttClient.connect(options);
         } catch (MqttException e) {
             log.error("【mqtt】connect emq server failed!");
             e.printStackTrace();

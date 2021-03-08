@@ -37,11 +37,11 @@ public class MqttProperty {
     private int timeout;
     /**
      * 存活时间
-     * */
+     */
     private long keepalive;
     /**
      * 会话时效： true-临时会话;false-持久会话
      */
-    private boolean cleanSession;
+    private boolean cleanSession = true;
 }
 

@@ -6,8 +6,6 @@ import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-
 /**
  * description: mqtt消息回调
  *
@@ -33,13 +31,13 @@ public class MqttMsgCallback implements MqttCallback {
      * 注：该方法由mqttClient客户端同步调用，在此方法未正确返回前不会发送ACK确认消息到emq broker,一旦该方法向外抛出异
      * 常将导致客户端异常关闭，当再次连接时，所有Qos1,Qos2且客户端未进行ACK确认的消息都将由emq broker再次发送到客户端。
      *
-     * @param s           主题
+     * @param topic       主题
      * @param mqttMessage 消息
      * @since 2021/3/7 22:31
      */
     @Override
-    public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-        log.info("【mqtt】消息接收! topic={}, messageId={}, Qos={}, payload={}", s, mqttMessage.getId(),
+    public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
+        log.info("【mqtt】消息接收! topic={}, messageId={}, Qos={}, payload={}", topic, mqttMessage.getId(),
                 mqttMessage.getQos(), new String(mqttMessage.getPayload()));
     }
 
