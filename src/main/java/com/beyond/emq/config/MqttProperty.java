@@ -40,7 +40,7 @@ public class MqttProperty {
      */
     private long keepalive;
     /**
-     * 会话时效： true-临时会话;false-持久会话
+     * 断开连接时是否清除会话信息，对应的会话时效： true-临时会话;false-持久会话
      */
     private boolean cleanSession = true;
 }
