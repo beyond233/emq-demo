@@ -6,11 +6,7 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-
-import java.lang.reflect.Method;
 
 /**
  * mqtt消息监听
@@ -28,7 +24,7 @@ public class MqttMsgListen {
     @Autowired
     private EmqClient emqClient;
 
-    @EventListener({ContextRefreshedEvent.class})
+//    @EventListener({ContextRefreshedEvent.class})
     public void initListen() {
         MqttClient mqttClient = null;
         try {
@@ -39,6 +35,7 @@ public class MqttMsgListen {
         MqttConnectOptions options = new MqttConnectOptions();
         options.setUserName(mqttProperty.getUsername());
         options.setPassword(mqttProperty.getPassword().toCharArray());
+        options.setCleanSession(true);
         try {
             if (mqttClient != null) {
                 mqttClient.setCallback(new MqttMsgCallback());
@@ -48,5 +45,6 @@ public class MqttMsgListen {
         } catch (MqttException e) {
             e.printStackTrace();
         }
+        log.info("【mqtt】消息监听完成");
     }
 }

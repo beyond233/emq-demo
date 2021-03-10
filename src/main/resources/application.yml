@@ -7,7 +7,7 @@ server:
 #MQTT配置信息
 mqtt:
   #MQTT-服务器连接地址，如果有多个，用逗号隔开，如：tcp://127.0.0.1:61613 
-  serverAddr: tcp://47.105.35.38:1883
+  serverAddr: tcp://192.168.22.93:1883
   #MQTT-连接服务器默认客户端ID
   clientId: emq_demo
   #MQTT-用户名
