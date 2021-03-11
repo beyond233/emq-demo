@@ -2,10 +2,9 @@ package com.beyond.emq.mqtt;
 
 import com.beyond.emq.config.MqttProperty;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 /**
@@ -24,27 +23,10 @@ public class MqttMsgListen {
     @Autowired
     private EmqClient emqClient;
 
-//    @EventListener({ContextRefreshedEvent.class})
+    @EventListener({ContextRefreshedEvent.class})
     public void initListen() {
-        MqttClient mqttClient = null;
-        try {
-            mqttClient = new MqttClient(mqttProperty.getServerAddr(), mqttProperty.getClientId(), null);
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
-        MqttConnectOptions options = new MqttConnectOptions();
-        options.setUserName(mqttProperty.getUsername());
-        options.setPassword(mqttProperty.getPassword().toCharArray());
-        options.setCleanSession(true);
-        try {
-            if (mqttClient != null) {
-                mqttClient.setCallback(new MqttMsgCallback());
-                mqttClient.connect(options);
-                mqttClient.subscribe("testtopic/#", MqttQos.AT_LEAST_ONCE.getValue());
-            }
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
-        log.info("【mqtt】消息监听完成");
+        emqClient.connect(mqttProperty.getUsername(), mqttProperty.getPassword());
+        emqClient.subscribe("testtopic/#", MqttQos.ONLY_ONCE);
+        emqClient.publish("testtopic/demo", "hello mqtt!", MqttQos.ONLY_ONCE, true);
     }
 }

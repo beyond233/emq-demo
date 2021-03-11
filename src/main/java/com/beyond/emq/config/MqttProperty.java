@@ -1,8 +1,8 @@
 package com.beyond.emq.config;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * description: mqtt配置类
@@ -11,8 +11,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 2021/2/28 19:41
  */
 @ConfigurationProperties(prefix = "mqtt")
+@Configuration
 @Data
-@Accessors(chain = true)
 public class MqttProperty {
 
     /**
@@ -32,11 +32,11 @@ public class MqttProperty {
      */
     private String password;
     /**
-     * 超时时间
+     * 超时时间(单位：秒)
      */
     private int timeout;
     /**
-     * 存活时间
+     * 存活时间(单位：秒)
      */
     private long keepalive;
     /**

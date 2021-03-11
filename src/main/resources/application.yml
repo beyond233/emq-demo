@@ -15,9 +15,9 @@ mqtt:
   #MQTT-密码
   password: public
   #连接超时
-  timeout: 1000
+  timeout: 10
   #心跳检查时间
-  keepalive: 10
+  keepalive: 60
   #会话时效
   cleanSession: true
 
